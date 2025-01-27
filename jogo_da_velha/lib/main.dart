@@ -87,80 +87,77 @@ class _TicTacToeGameState extends State<TicTacToeGame> {
           ),),
         centerTitle: true,
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const SizedBox(height: 20,),
-            GridView.builder(
-              
-              padding: EdgeInsets.symmetric(horizontal: 30),
-              shrinkWrap: true,
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 3,
-                mainAxisSpacing: 8.0,
-                crossAxisSpacing: 8.0,
-                childAspectRatio: 0.5,
-                mainAxisExtent: 80
-              ),
-              itemCount: 9,
-              itemBuilder: (context, index) {
-                return GestureDetector(
-                  onTap: () => makeMove(index),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.purple,
-                      // border: Border.all(color: Colors.black),
-                      borderRadius: BorderRadius.circular(8.0),
-                    ),
-                    child: Center(
-                      child: Text(
-                        board[index],
-                        style: TextStyle(
-                          color: Colors.purple[200],
-                          fontSize: 40.0,
-                          fontWeight: FontWeight.bold,
-                        ),
+      body: Column(
+        
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const SizedBox(height: 20,),
+          GridView.builder(
+            
+            padding: EdgeInsets.symmetric(horizontal: 30),
+            shrinkWrap: true,
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 3,
+              mainAxisSpacing: 8.0,
+              crossAxisSpacing: 8.0,
+              mainAxisExtent: 110
+            ),
+            itemCount: 9,
+            itemBuilder: (context, index) {
+              return GestureDetector(
+                onTap: () => makeMove(index),
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.purple,
+                    // border: Border.all(color: Colors.black),
+                    borderRadius: BorderRadius.circular(8.0),
+                  ),
+                  child: Center(
+                    child: Text(
+                      board[index],
+                      style: TextStyle(
+                        color: Colors.purple[200],
+                        fontSize: 40.0,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),
-                );
-              },
+                ),
+              );
+            },
+          ),
+          const SizedBox(height: 20.0),
+          if (winner.isNotEmpty)
+            Text(
+              'Vencedor: $winner',
+              style: const TextStyle(
+                fontSize: 24.0,
+                fontWeight: FontWeight.bold,
+                color: Colors.green,
+              ),
             ),
-            const SizedBox(height: 20.0),
-            if (winner.isNotEmpty)
-              Text(
-                'Vencedor: $winner',
-                style: const TextStyle(
-                  fontSize: 24.0,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.green,
-                ),
+          if (winner.isEmpty && board.every((cell) => cell.isNotEmpty))
+            const Text(
+              'Empate!',
+              style: TextStyle(
+                fontSize: 24.0,
+                fontWeight: FontWeight.bold,
+                color: Colors.red,
               ),
-            if (winner.isEmpty && board.every((cell) => cell.isNotEmpty))
-              const Text(
-                'Empate!',
-                style: TextStyle(
-                  fontSize: 24.0,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.red,
-                ),
-              ),
-            const SizedBox(height: 20.0),
-            OutlinedButton(
-              style: OutlinedButton.styleFrom(
-                foregroundColor: Colors.purpleAccent,
-                side: BorderSide(
-                  width: 2.5,
-                  color: Colors.purpleAccent)
-              ),
-              onPressed: resetGame,
-              child: const Text("Reiniciar Jogo")),
-            
-            
-          ],
-        ),
+            ),
+          const SizedBox(height: 20.0),
+          OutlinedButton(
+            style: OutlinedButton.styleFrom(
+              foregroundColor: Colors.purpleAccent,
+              side: BorderSide(
+                width: 2.5,
+                color: Colors.purpleAccent)
+            ),
+            onPressed: resetGame,
+            child: const Text("Reiniciar Jogo")),
+          
+          
+        ],
       ),
     );
   }
